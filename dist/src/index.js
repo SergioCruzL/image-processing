@@ -10,6 +10,7 @@ var lienzo4;
 var pantalla1;
 var pantalla2;
 var pantalla4;
+var contador = 0;
 /* Este evento controla la forma de abrir un archivo mediante el evento de arrastrar y soltar */
 function handleDragOver(evt) {
     evt.stopPropagation();
@@ -286,10 +287,22 @@ function cierreImg(evt) {
     imagenSal.imageArray2DtoData(pantalla2, MathImg.cierre(imagenSal, true));
 }
 function opchangeFalsoColor(evt) {
-    var argss = prompt('Ingresa un valor de color Hue');
-    var hue = parseFloat(argss);
-    var imagenSal = new ImageType(pantalla1, imgLocal.getImage());
-    imagenSal.imageArray2DtoData(pantalla2, MathImg.fromHSItoRGB(MathImg.falseColorByHue(MathImg.fromRGBtoHSI(imagenSal), hue, 120)));
+    alert('Seleccione el área del color a cambiar con dos clic. <br> Un click en una esquina y otro click en la esquina opuesta');
+    lienzo1.addEventListener('click', imgLocal.drawArea);
+    lienzo1.addEventListener('click', clickearCanvas);
+    lienzo1.removeEventListener("mousemove", imgLocal.drawSmallImg);
+}
+function clickearCanvas(evt) {
+    contador += 1;
+    if (contador == 2) {
+        contador = 0;
+        var imagenSal = new ImageType(pantalla1, imgLocal.getImage());
+        imagenSal.imageArray2DtoData(pantalla2, MathImg.fromHSItoRGB(MathImg.falseColorByHue(MathImg.fromRGBtoHSI(imagenSal), imgLocal.minMax, 210)));
+        lienzo1.removeEventListener('click', clickearCanvas);
+        lienzo1.removeEventListener('click', imgLocal.drawArea);
+        lienzo1.addEventListener("mousemove", imgLocal.drawSmallImg);
+    }
+    else { }
 }
 lienzo1.addEventListener('mousemove', handleMouse);
 lienzo1.addEventListener("mousemove", imgLocal.drawSmallImg);
