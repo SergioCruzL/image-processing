@@ -287,7 +287,7 @@ function cierreImg(evt) {
     imagenSal.imageArray2DtoData(pantalla2, MathImg.cierre(imagenSal, true));
 }
 function opchangeFalsoColor(evt) {
-    alert('Seleccione el área del color a cambiar con dos clic. <br> Un click en una esquina y otro click en la esquina opuesta');
+    alert('Seleccione el área del color a cambiar con dos clic. Un click en una esquina y otro click en la esquina opuesta');
     lienzo1.addEventListener('click', imgLocal.drawArea);
     lienzo1.addEventListener('click', clickearCanvas);
     lienzo1.removeEventListener("mousemove", imgLocal.drawSmallImg);
